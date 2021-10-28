@@ -1,7 +1,9 @@
 from helpers.PopulaEnvironment import PopulaEnvironment
+from algoritmo.AEstrela import AEstrela
 
 def main():
     environment = PopulaEnvironment().make()
-    environment.visit()
+    search = AEstrela(environment)
+    search.search('U', 'A')
 
 main()

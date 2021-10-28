@@ -16,7 +16,7 @@ class Environment:
         self.__rooms.update({room.getLabel(): dict})
 
     def findRoom(self, label):
-        return self.__rooms[label]
+        return self.__rooms.get(label)
     
     def visit(self):
         print("Salas: ", len(self.__rooms.values()) ,"\n")
