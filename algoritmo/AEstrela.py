@@ -38,6 +38,10 @@ class AEstrela:
         else:
             distance = next.getArea()
         self.__distance.update({next.getLabel():{'distance': distance, 'open': True}})
+
+    def print(self):
+        print("chegou")
+        print("{}".format(self.__queue.qsize()))
     
     def search(self, root, destiny):
         self.__destiny = destiny
@@ -46,13 +50,13 @@ class AEstrela:
 
         while not self.__queue.empty():
             no = self.__queue.get()
-            print("{} - g(n) = {}".format(no,  self.__distance.get(no).get('distance')))
             if(no == destiny):
-                print("chegou")
+                self.print()
                 return
 
             next = self.getProximoNo(no)
             if(next != None):
+                print("{}".format(no))
                 self.__queue.put(next)
                 self.__distance.get(next).update({'open': False})
 
