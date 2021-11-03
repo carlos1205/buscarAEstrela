@@ -40,26 +40,28 @@ class AEstrela:
         self.__distance.update({next.getLabel():{'distance': distance, 'open': True}})
 
     def print(self):
-        print("chegou")
-        print("{}".format(self.__queue.qsize()))
+        while not self.__queue.empty():
+            print("{} ".format(self.__queue.get()), end="")
+        print()
     
     def search(self, root, destiny):
         self.__destiny = destiny
         self.avalia(self.__environment.findRoom(root).get('room'), None)
         self.__queue.put(root)
 
+        no = root
         while not self.__queue.empty():
-            no = self.__queue.get()
             if(no == destiny):
                 self.print()
                 return
 
             next = self.getProximoNo(no)
             if(next != None):
-                print("{}".format(no))
+                no = next
                 self.__queue.put(next)
                 self.__distance.get(next).update({'open': False})
-
+            else:
+                no = self.__queue.get()
 
         print("Não existe!")
         return 0

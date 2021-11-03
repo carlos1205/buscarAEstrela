@@ -9,6 +9,7 @@ def main():
         print("2 - para busca em Largura")
         print("3 - para busca Gulosa")
         print("4 - para busca A*")
+        print("0 - para sair")
         choice = int(input())
         # print("Digite a sala de origim:")
         # root = input()
