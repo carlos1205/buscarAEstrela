@@ -45,6 +45,10 @@ class AEstrela:
         print()
     
     def search(self, root, destiny):
+        if(self.__environment.findRoom(root) == None or self.__environment.findRoom(destiny) == None):
+            print("Não existe!")
+            return
+
         self.__destiny = destiny
         self.avalia(self.__environment.findRoom(root).get('room'), None)
         self.__queue.put(root)
@@ -54,7 +58,7 @@ class AEstrela:
             if(no == destiny):
                 self.print()
                 return
-
+            
             next = self.getProximoNo(no)
             if(next != None):
                 no = next
@@ -64,4 +68,4 @@ class AEstrela:
                 no = self.__queue.get()
 
         print("Não existe!")
-        return 0
+        return

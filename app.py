@@ -10,26 +10,30 @@ def main():
         print("3 - para busca Gulosa")
         print("4 - para busca A*")
         print("0 - para sair")
+
         choice = int(input())
-        # print("Digite a sala de origim:")
-        # root = input()
-        # print("Digite a sala de destino")
-        # destiny = input()
+
+        if(0 == choice):
+            continue
+
+        print("Digite a sala de origem:")
+        root = input()
+        print("Digite a sala de destino")
+        destiny = input()
+
         if(1 == choice):
-            pass#profundidade
+            continue#profundidade
         if(2 == choice):
-            pass#largura
+            continue#largura
         if(3 == choice):
-            pass#gulosa
+            continue#gulosa
         if(4 == choice):
             environment = PopulaEnvironment().make()
             search = AEstrela(environment)
-            search.search('A', 'U')
-            pass
-        if(0 == choice):
-            pass
+            search.search(root, destiny)
+            continue
         else:
-            pass
+            continue
 
 
 main()
