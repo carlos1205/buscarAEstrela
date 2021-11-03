@@ -1,5 +1,6 @@
 from helpers.PopulaEnvironment import PopulaEnvironment
 from algoritmo.AEstrela import AEstrela
+from algoritmo.AlgoritmoGuloso import AGuloso
 
 def main():
     choice = 1
@@ -21,13 +22,16 @@ def main():
         print("Digite a sala de destino")
         destiny = input()
 
-        if(1 == choice):
-            continue#profundidade
-        if(2 == choice):
-            continue#largura
-        if(3 == choice):
-            continue#gulosa
-        if(4 == choice):
+        if(1 == choice):#profundidade
+            continue
+        if(2 == choice):#largura
+            continue
+        if(3 == choice):#gulosa
+            environment = PopulaEnvironment().make()
+            search = AGuloso(environment)
+            search.search(root, destiny)
+            continue
+        if(4 == choice):#A*
             environment = PopulaEnvironment().make()
             search = AEstrela(environment)
             search.search(root, destiny)
