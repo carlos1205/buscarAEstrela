@@ -1,6 +1,7 @@
 from helpers.PopulaEnvironment import PopulaEnvironment
 from algoritmo.AEstrela import AEstrela
 from algoritmo.AlgoritmoGuloso import AGuloso
+from algoritmo.bfsLabirinto import searchBFS
 
 def main():
     choice = 1
@@ -24,7 +25,8 @@ def main():
 
         if(1 == choice):#profundidade
             continue
-        if(2 == choice):#largura
+        if(2 == choice):
+            searchBFS(root, destiny)
             continue
         if(3 == choice):#gulosa
             environment = PopulaEnvironment().make()
