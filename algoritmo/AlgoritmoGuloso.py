@@ -41,7 +41,7 @@ class AGuloso:
 
     def print(self):
         while not self.__queue.empty():
-            print("{} ".format(self.__queue.get()), end="")
+            print("{} ".format(self.__queue))
         print()
     
     def search(self, root, destiny):

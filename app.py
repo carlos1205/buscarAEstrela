@@ -2,6 +2,7 @@ from helpers.PopulaEnvironment import PopulaEnvironment
 from algoritmo.AEstrela import AEstrela
 from algoritmo.AlgoritmoGuloso import AGuloso
 from algoritmo.bfsLabirinto import searchBFS
+from algoritmo.dfs import searchDFS
 
 def main():
     choice = 1
@@ -24,6 +25,7 @@ def main():
         destiny = input()
 
         if(1 == choice):#profundidade
+            searchDFS(root, destiny)
             continue
         if(2 == choice):
             searchBFS(root, destiny)
@@ -40,6 +42,5 @@ def main():
             continue
         else:
             continue
-
 
 main()
