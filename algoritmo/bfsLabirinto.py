@@ -7,8 +7,11 @@ graph = {'A': ['C'], 'B': ['C', 'D'], 'C': ['A', 'B', 'G'], 'D': ['B', 'E'], 'E'
 def bfs(graph, start, end):
     # Fila com os caminhos
     queue = []
+    # definimos uma lista para gravar os itens já visitados
+    visited = set()
     # Coloca o inicio na fila
     queue.append([start])
+    visited.add(start)
     while queue:
         # Pega o primeiro caminho da fila
         path = queue.pop(0)
@@ -19,9 +22,12 @@ def bfs(graph, start, end):
             return path
         # enumere todos os nós adjacentes, construa um novo caminho e coloque-o na fila
         for adjacent in graph.get(node, []):
-            new_path = list(path)
-            new_path.append(adjacent)
-            queue.append(new_path)
+            # se a aresta ainda não foi visitada
+            if adjacent not in visited:
+                new_path = list(path)
+                new_path.append(adjacent)
+                visited.add(adjacent)
+                queue.append(new_path)
 
 
 def searchBFS(root, destiny):
