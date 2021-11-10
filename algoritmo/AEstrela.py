@@ -18,31 +18,44 @@ class AEstrela:
     def f(self, n):
         return self.h(n) + self.g(n)
 
-    def getProximoNo(self, n):
-        room = self.__environment.findRoom(n).get('room')
+    def findMenor(self):
         choice = None
+        for label, dist in self.__distance.items():
+            if(dist.get('open')):
+                if(choice == None):
+                    choice = [label, dist.get('distance')]
+                else:
+                    choice = [label, dist.get('distance')] if dist.get('distance') < choice[1] else choice
+        
+        return choice[0] if choice != None else None
+
+    def getProximoNo(self):
+        menor = self.findMenor()
+        room = self.__environment.findRoom(menor).get('room')
         for door in room.getDoors():
             label = door.getDestiny().getLabel()
             if(self.__distance.get(label) == None or self.__distance.get(label).get('open')):
                 self.avalia(door.getDestiny(), room)
-                f = self.f(label)
-                if(choice == None):
-                    choice = [label, f]
-                else:
-                    choice = [label, f] if f < choice[1] else choice
-        return choice[0]
+        return menor
 
     def avalia(self, next, prev):
+        l = None
         if(prev != None):
-            distance = self.__distance.get(prev.getLabel()).get('distance') + next.getArea()
+            l = prev.getLabel()
+            distance = self.__distance.get(l).get('distance') + next.getArea()
         else:
             distance = next.getArea()
-        self.__distance.update({next.getLabel():{'distance': distance, 'open': True}})
+        
+        if(self.__distance.get(next.getLabel()) == None):
+            self.__distance.update({next.getLabel():{'distance': distance, 'prev': l ,'open': True}})
 
-    def print(self):
-        while not self.__queue.empty():
-            print("{} ".format(self.__queue.get()), end="")
-        print()
+
+    def print(self, node):
+        arr = [node]
+        while node != None:
+            arr.insert(0, node)
+            node = self.__distance.get(node).get('prev')
+        print(arr)
     
     def search(self, root, destiny):
         if(self.__environment.findRoom(root) == None or self.__environment.findRoom(destiny) == None):
@@ -56,16 +69,16 @@ class AEstrela:
         no = root
         while not self.__queue.empty():
             if(no == destiny):
-                self.print()
+                self.print(no)
                 return
             
-            next = self.getProximoNo(no)
+            next = self.getProximoNo()
             if(next != None):
                 no = next
                 self.__queue.put(next)
                 self.__distance.get(next).update({'open': False})
             else:
-                no = self.__queue.get()
+                self.__queue.get()
 
         print("Não existe!")
         return
